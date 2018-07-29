@@ -84,7 +84,7 @@ class php::repo::debian(
     ::apt::source { 'source_php_72':
       location => 'https://packages.sury.org/php/',
       release  => $release,
-      repos    => $repos,
+      repos    => 'main',
       include  => {
         'src'  => $include_src,
         'deb'  => true,
