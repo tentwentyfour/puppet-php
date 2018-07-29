@@ -29,7 +29,8 @@ class php::repo::debian(
     'id'     => '6572BBEF1B5FF28B28B706837E3F070089DF5277',
     'source' => 'http://www.dotdeb.org/dotdeb.gpg',
   },
-  $dotdeb       = true,
+  $dotdeb       = false,
+  $sury         = true,
 ) {
 
   if $caller_module_name != $module_name {
