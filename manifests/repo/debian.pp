@@ -71,17 +71,17 @@ class php::repo::debian(
     }
   }
 
-   if ($sury and $php::globals::php_version == '7.2') {
-    # Required packages for PHP 7.2 repository
+   if ($sury and versioncmp($php::globals::php_version,'7.2') >= 0) {
+    # Required packages for Sury PHP 7.x repository
     ensure_packages(['lsb-release', 'ca-certificates'], {'ensure' => 'present'})
 
-    # Add PHP 7.2 key + repository
-    apt::key { 'php::repo::debian-php72':
+    # Add sury PHP 7.x key + repository
+    apt::key { 'php::repo::debian-php-sury':
       id     => 'DF3D585DB8F0EB658690A554AC0E47584A7A714D',
       source => 'https://packages.sury.org/php/apt.gpg',
     }
 
-    ::apt::source { 'source_php_72':
+    ::apt::source { 'source_php_sury':
       location => 'https://packages.sury.org/php/',
       release  => $release,
       repos    => 'main',
@@ -90,7 +90,7 @@ class php::repo::debian(
         'deb'  => true,
       },
       require  => [
-        Apt::Key['php::repo::debian-php72'],
+        Apt::Key['php::repo::debian-php-sury'],
         Package['apt-transport-https', 'lsb-release', 'ca-certificates']
       ],
     }
